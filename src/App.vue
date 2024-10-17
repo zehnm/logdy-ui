@@ -16,7 +16,7 @@ import Import from "./components/Import.vue"
 import LoadLogs from "./components/LoadLogs.vue"
 import DoubleLeft from "./components/icon/DoubleLeft.vue"
 import DoubleRight from "./components/icon/DoubleRight.vue"
-import Flag from "./components/icon/Flag.vue"
+// import Flag from "./components/icon/Flag.vue"
 import ArrowRightUp from "./components/icon/ArrowRightUp.vue"
 import HideColumnIcon from "./components/HideColumnIcon.vue"
 import ExportLogs from "./components/ExportLogs.vue"
@@ -582,9 +582,9 @@ const updateSampleLine = () => {
           </a>
           <ArrowRightUp style=""></ArrowRightUp>
         </div>
-        <div class="docs link-style" @click="store.modalShow = 'feedback'" style="cursor:pointer">
-          Leave feedback <Flag></Flag>
-        </div>
+<!--        <div class="docs link-style" @click="store.modalShow = 'feedback'" style="cursor:pointer">-->
+<!--          Leave feedback <Flag></Flag>-->
+<!--        </div>-->
       </div>
       <div class="right">
         <input type="text" class="searchbar" v-model="store.searchbar" placeholder="Search logs..." />
