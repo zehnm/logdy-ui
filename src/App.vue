@@ -363,12 +363,14 @@ const connectToWs = () => {
   socket.onopen = () => {
     wasOpened = true
     store.status = 'connected'
+    keepAlive(socket)
     render()
   }
 
   socket.onclose = () => {
     if (socket.CLOSED && wasOpened) {
       store.status = 'not connected'
+      cancelKeepAlive()
       connectToWs()
     }
   }
@@ -379,6 +381,21 @@ const connectToWs = () => {
       console.log("Reconnecting to WS")
       connectToWs()
     }, 1000)
+  }
+
+  let timerId = 0
+
+  function keepAlive (ws: WebSocket, timeout = 15000) {
+    if (ws.readyState === WebSocket.OPEN) {
+      ws.send('{"message_type": "ping"}')
+    }
+    timerId = setTimeout(keepAlive, timeout, ws)
+  }
+
+  function cancelKeepAlive () {
+    if (timerId) {
+      clearTimeout(timerId)
+    }
   }
 
   socket.onmessage = (msg: MessageEvent) => {
